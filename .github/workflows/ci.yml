@@ -1,0 +1,49 @@
+name: CI for Machine Learning Model
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual trigger of the workflow
+    inputs:
+      run_training:
+        description: "Run training job manually"
+        required: false
+
+jobs:
+  build-and-train:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Python environment
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # Step 4: Train and evaluate the model
+    - name: Run training script
+      run: make train
+
+    # Step 5: Upload results as artifacts
+    - name: Save results
+      uses: actions/upload-artifact@v3
+      with:
+        name: results
+        path: |
+          Results/metrics.txt
+          Results/model_results.png
+          Model/drug_pipeline.skops
