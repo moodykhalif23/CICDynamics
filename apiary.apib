@@ -2,15 +2,13 @@ FORMAT: 1A
 HOST: https://polls.apiblueprint.org/
 
 # moodykhalif23 
-
 Polls is a simple API allowing consumers to view polls and vote in them.
 
 ## Questions Collection [/questions]
 
 ### List All Questions [GET]
-
 + Response 200 (application/json)
-
+    + Body
         [
             {
                 "question": "Favourite programming language?",
@@ -34,13 +32,10 @@ Polls is a simple API allowing consumers to view polls and vote in them.
         ]
 
 ### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+You may create your own question using this action. It takes a JSON object containing a question and a collection of answers in the form of choices.
 
 + Request (application/json)
-
+    + Body
         {
             "question": "Favourite programming language?",
             "choices": [
@@ -52,29 +47,25 @@ form of choices.
         }
 
 + Response 201 (application/json)
-
     + Headers
-
-            Location: /questions/2
-
+        Location: /questions/2
     + Body
-
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+        {
+            "question": "Favourite programming language?",
+            "published_at": "2015-08-05T08:40:51.620Z",
+            "choices": [
+                {
+                    "choice": "Swift",
+                    "votes": 0
+                }, {
+                    "choice": "Python",
+                    "votes": 0
+                }, {
+                    "choice": "Objective-C",
+                    "votes": 0
+                }, {
+                    "choice": "Ruby",
+                    "votes": 0
+                }
+            ]
+        }
